@@ -23,17 +23,18 @@ namespace CompilerLab.PFN
         public MainWindow()
         {
             InitializeComponent();
-
+            OperatorPrecendence = Operators.Precedence;
         }
-        public async Task Evaluate(string input)
+        private Dictionary<char, int> OperatorPrecendence { get; set; }
+        public async Task<string> Evaluate(string input)
         {
-
+            return await PFNEngine.ConvertToPNF(input, OperatorPrecendence);
         }
 
-        private async void BtnEvaluate_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void BtnEvaluate_Click(object sender, RoutedEventArgs e)
         {
             var input = TxtInput.Text;
-            await Evaluate(input);
+            TxtOutput.Text = await Evaluate(input);
         }
     }
 }

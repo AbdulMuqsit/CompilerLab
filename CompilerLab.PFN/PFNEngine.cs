@@ -8,20 +8,35 @@ namespace CompilerLab.PFN
 {
     public class PFNEngine
     {
-        public static string ConvertToPNF(string expression, Dictionary<char, int> precedence)
+        public static async Task<string> ConvertToPNF(string expression, Dictionary<char, int> precedence)
         {
-            Stack<char> operandStack = new Stack<char>();
-            StringBuilder pnfString = new StringBuilder();
+            return await Task.Run(() =>
+             {
+                 Stack<char> operandStack = new Stack<char>();
+                 StringBuilder pnfString = new StringBuilder();
 
-            var expressionArray = expression.ToCharArray();
-            for (int i = 0; i < expressionArray.Count(); i++)
-            {
-                if (Char.IsDigit(expressionArray[i]))
-                {
-                    pnfString.Append(expressionArray[i]);
-                }
-            }
-            return pnfString.ToString();
+                 var expressionArray = expression.ToCharArray();
+                 for (int i = 0; i < expressionArray.Count(); i++)
+                 {
+                     var currentCharacter = expressionArray[i];
+                     if (Char.IsDigit(currentCharacter))
+                     {
+                         pnfString.Append(currentCharacter);
+                     }
+                     else if (precedence.Keys.Contains(currentCharacter))
+                     {
+                         if (operandStack.Count == 0 || precedence[operandStack.Peek()] < precedence[currentCharacter])
+                         {
+                             operandStack.Push(currentCharacter);
+                         }
+                         else
+                         {
+                             pnfString.Append(operandStack.Pop());
+                         }
+                     }
+                 }
+                 return pnfString.ToString();
+             });
         }
     }
 }

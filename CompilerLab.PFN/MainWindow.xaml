@@ -13,7 +13,7 @@
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBox Name="TxtInput"  Grid.Row="0"></TextBox>
-        <Button Name="BtnEvaluate" MouseLeftButtonDown="BtnEvaluate_MouseLeftButtonDown"  Grid.Row="1"></Button>
+        <Button Name="BtnEvaluate" Click="BtnEvaluate_Click"  Grid.Row="1"></Button>
         <TextBox Name="TxtOutput" Grid.Row="2"></TextBox>
     </Grid>
 </Window>

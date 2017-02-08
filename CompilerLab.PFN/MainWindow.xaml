@@ -10,10 +10,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Name="TxtInput"  Grid.Row="0"></TextBox>
-        <Button Name="BtnEvaluate" Click="BtnEvaluate_Click"  Grid.Row="1"></Button>
-        <TextBox Name="TxtOutput" Grid.Row="2"></TextBox>
+        <TextBox Name="TxtBoxInput" PreviewKeyDown="TxtInput_PreviewKeyDown"  Grid.Row="0"></TextBox>
+        <Button Name="BtnEvaluate" Click="BtnEvaluate_Click"  Grid.Row="1">Evaluate</Button>
+        <TextBlock Name="TxtBlkOutput" Grid.Row="2"></TextBlock>
+        <TextBlock Name="TxtBlkError" Foreground="Red"  Grid.Row="3"></TextBlock>
+
     </Grid>
 </Window>

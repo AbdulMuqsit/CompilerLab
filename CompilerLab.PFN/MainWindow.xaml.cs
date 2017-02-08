@@ -24,17 +24,71 @@ namespace CompilerLab.PFN
         {
             InitializeComponent();
             OperatorPrecendence = Operators.Precedence;
+
         }
+        private PFNEngine PFNEngine { get; } = new PFNEngine();
         private Dictionary<char, int> OperatorPrecendence { get; set; }
         public async Task<string> Evaluate(string input)
         {
-            return await PFNEngine.ConvertToPNF(input, OperatorPrecendence);
+            return await PFNEngine.ConvertToPFNString(input, OperatorPrecendence);
         }
 
         private async void BtnEvaluate_Click(object sender, RoutedEventArgs e)
         {
-            var input = TxtInput.Text;
-            TxtOutput.Text = await Evaluate(input);
+            var input = TxtBoxInput.Text;
+            TxtBlkOutput.Text = await Evaluate(input);
+        }
+
+        private void TxtInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TxtBlkError.Visibility = Visibility.Collapsed;
+            //arrow keys, backspace and enter
+            if (e.Key == Key.Enter || e.Key == Key.Delete || e.Key == Key.Back || e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right)
+            {
+                return;
+            }
+            //a new expression starting with a digit
+            else if (String.IsNullOrEmpty(TxtBoxInput.Text) && e.Key >= Key.D0 && e.Key <= Key.D9)
+            {
+                return;
+            }
+            //
+            else if (!String.IsNullOrEmpty(TxtBoxInput.Text))
+            {
+                if (Operators.OperatorsList.Contains(TxtBoxInput.Text.Last()) && ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)))
+                {
+                    return;
+                }
+
+                else if (Operators.OperatorsList.Contains(TxtBoxInput.Text.Last()) && (e.Key == Key.Add || e.Key == Key.Divide || e.Key == Key.Multiply || e.Key == Key.Subtract))
+                {
+                    TxtBlkError.Visibility = Visibility.Visible;
+                    TxtBlkError.Text = "Two consecutive operators are not valid. Please insert a digit.";
+                }
+                else if ((TxtBoxInput.Text != String.Empty && Char.IsDigit(TxtBoxInput.Text.Last())) && (e.Key >= Key.D0 && e.Key <= Key.D9))
+                {
+                    TxtBlkError.Visibility = Visibility.Visible;
+                    TxtBlkError.Text = "Only single digit integers are allowed, Please insert an operator now.";
+                }
+                else if (TxtBoxInput.Text != String.Empty && Operators.OperatorsList.Contains(TxtBoxInput.Text.Last()) && (e.Key == Key.Add || e.Key == Key.Divide || e.Key == Key.Multiply || e.Key == Key.Subtract))
+                {
+                    TxtBlkError.Visibility = Visibility.Visible;
+                    TxtBlkError.Text = "Two consecutive operators are not valid. Please insert a digit.";
+                }
+                else if (TxtBoxInput.Text == String.Empty && (e.Key == Key.Add || e.Key == Key.Divide || e.Key == Key.Multiply || e.Key == Key.Subtract))
+                {
+                    TxtBlkError.Visibility = Visibility.Visible;
+                    TxtBlkError.Text = "Expression can not start with an operator, please enter a digit.";
+                }
+
+
+            }
+            else
+            {
+                TxtBlkError.Visibility = Visibility.Visible;
+                TxtBlkError.Text = "Alphabets and special characters are not allowed.";
+            }
+            e.Handled = true;
         }
     }
 }

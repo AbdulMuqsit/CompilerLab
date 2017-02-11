@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:CompilerLab.DesktopApplication.ViewModels"
               xmlns:infrastructure="clr-namespace:CompilerLab.DesktopApplication.Infrastructure"
 
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
         <ResourceDictionary>
             <infrastructure:ViewModelLocator x:Key ="ViewModelLocator"/>

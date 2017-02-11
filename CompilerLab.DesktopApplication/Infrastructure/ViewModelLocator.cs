@@ -1,4 +1,7 @@
 ﻿using CompilerLab.DesktopApplication.ViewModels;
+using CompilerLab.PFN;
+using CompilerLab.PFN.Contracts;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +12,14 @@ namespace CompilerLab.DesktopApplication.Infrastructure
 {
     public class ViewModelLocator
     {
-        public MainViewModel MainViewModel { get; } = new MainViewModel();
-        public PFNViewModel PFNViewModel { get; } = new PFNViewModel();
+        public ViewModelLocator()
+        {
+            var container = ((App)App.Current).container;
+            PFNViewModel = container.Get<PFNViewModel>();
+            MainViewModel = container.Get<MainViewModel>();
+        }
+        public MainViewModel MainViewModel { get; }
+        public PFNViewModel PFNViewModel { get; }
 
     }
 }

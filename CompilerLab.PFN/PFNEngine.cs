@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompilerLab.PFN.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompilerLab.PFN
 {
-    public class PFNEngine
+    public class PFNEngine : IPFNEngine
     {
         private OperatorProperties OperatorProperties { get; } = new OperatorProperties();
 
@@ -47,15 +48,18 @@ namespace CompilerLab.PFN
         }
         public async Task<int> EvaluatePFNString(string PFNString)
         {
-            var PFNArray = PFNString.ToCharArray();
-            for (int i = 0; i < PFNString.Count(); i++)
+            return await Task.Run(() =>
             {
-                if (OperatorProperties.OperatorsList.Contains(PFNArray[i + 2]))
+                var PFNArray = PFNString.ToCharArray();
+                for (int i = 0; i < PFNString.Count(); i++)
                 {
-                    EvaluateExpression(PFNArray[i], PFNArray[i + 1], PFNArray[i + 2]);
+                    if (OperatorProperties.OperatorsList.Contains(PFNArray[i + 2]))
+                    {
+                        EvaluateExpression(PFNArray[i], PFNArray[i + 1], PFNArray[i + 2]);
+                    }
                 }
-            }
-            return 0;
+                return 0;
+            });
 
         }
 

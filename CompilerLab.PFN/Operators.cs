@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CompilerLab.PFN
 {
-    class Operators
+    public class OperatorProperties
     {
-        public static List<char> OperatorsList { get; }
-        public static Dictionary<char, int> Precedence { get; } = new Dictionary<char, int> { { '+', 1 }, { '-', 1 }, { '*', 2 }, { '/', 2 }, { '^', 3 } };
-        static Operators()
+        public List<char> OperatorsList { get; }
+        public Dictionary<char, int> Precedence { get; } = new Dictionary<char, int> { { '+', 1 }, { '-', 1 }, { '*', 2 }, { '/', 2 }, { '^', 3 } };
+        public OperatorProperties()
         {
             OperatorsList = Precedence.Keys.ToList();
         }

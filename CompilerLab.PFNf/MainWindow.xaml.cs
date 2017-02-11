@@ -59,7 +59,6 @@ namespace CompilerLab.PFN
                 {
                     return;
                 }
-
                 else if (Operators.OperatorsList.Contains(TxtBoxInput.Text.Last()) && (e.Key == Key.Add || e.Key == Key.Divide || e.Key == Key.Multiply || e.Key == Key.Subtract))
                 {
                     TxtBlkError.Visibility = Visibility.Visible;
@@ -80,8 +79,7 @@ namespace CompilerLab.PFN
                     TxtBlkError.Visibility = Visibility.Visible;
                     TxtBlkError.Text = "Expression can not start with an operator, please enter a digit.";
                 }
-
-
+                
             }
             else
             {

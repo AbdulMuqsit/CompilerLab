@@ -8,6 +8,7 @@ namespace CompilerLab.PFN
 {
     public class PFNEngine
     {
+        private OperatorProperties OperatorProperties { get; } = new OperatorProperties();
 
         public async Task<string> ConvertToPFNString(string expression, Dictionary<char, int> precedence)
         {
@@ -49,7 +50,7 @@ namespace CompilerLab.PFN
             var PFNArray = PFNString.ToCharArray();
             for (int i = 0; i < PFNString.Count(); i++)
             {
-                if (Operators.OperatorsList.Contains(PFNArray[i + 2]))
+                if (OperatorProperties.OperatorsList.Contains(PFNArray[i + 2]))
                 {
                     EvaluateExpression(PFNArray[i], PFNArray[i + 1], PFNArray[i + 2]);
                 }

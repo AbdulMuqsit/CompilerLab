@@ -61,7 +61,6 @@ namespace CompilerLab.DesktopApplication.ViewModels
                 OnPropertyChanged();
             }
         }
-        [Inject]
         public PFNViewModel(IPFNEngine pFNEngine, OperatorProperties operatorProperties)
         {
             PFNEngine = pFNEngine;

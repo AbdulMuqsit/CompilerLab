@@ -8,8 +8,9 @@ namespace CompilerLab.PFN.Contracts
 {
     public interface IPFNEngine
     {
-        Task<string> ConvertToPFNString(string expression, Dictionary<char, int> precedence);
+        Task<string> ConvertToPFNString(string expression, Dictionary<char, int[]> precedence);
         Task<int> EvaluatePFNString(string PFNString);
+        Task<string> Normalize(string input);
 
     }
 }

@@ -11,7 +11,7 @@ namespace CompilerLab.DesktopApplication.Infrastructure
     public class ViewModelBase : INotifyPropertyChanged
     {
         private ViewModelLocator _viewModelLocator;
-
+        public State State { get; set; }
         public ViewModelLocator ViewModelLocator
         {
             get

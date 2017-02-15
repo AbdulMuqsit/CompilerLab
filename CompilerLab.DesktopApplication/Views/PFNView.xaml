@@ -10,13 +10,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+
             <RowDefinition Height="*"></RowDefinition>
 
-            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Name="TxtBoxInput" Text="{Binding InputString}"  Grid.Row="0"></TextBox>
+        <TextBox Name="TxtBoxInput" Text="{Binding InputString, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0"></TextBox>
         <Button Name="BtnEvaluate" Command="{Binding EvaluateCommand}"  Grid.Row="1">Evaluate</Button>
-        <TextBlock Name="TxtBlkOutput" Text="{Binding IntermediatePFNString}"  Grid.Row="2"></TextBlock>
-        <TextBlock Name="TxtBlkError" Text="{Binding ErrorString}"  Foreground="Red"  Grid.Row="3"></TextBlock>
+        <StackPanel Orientation="Horizontal"  Grid.Row="2" >
+            <TextBlock Text="Normalized Input: " ></TextBlock>
+
+            <TextBlock Text="{Binding NormalizedInput}" Foreground="Blue"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="3" >
+            <TextBlock Text="Intermediate PFN string: " ></TextBlock>
+
+            <TextBlock Name="TxtBlkOutput" Text="{Binding IntermediatePFNString}" Foreground="Blue"></TextBlock>
+        </StackPanel>
+
+        <TextBox Name="TxtBlkError"  Grid.Row="4" VerticalScrollBarVisibility="Auto"  Text="{Binding ErrorString}" AcceptsReturn="True" TextWrapping="Wrap"  IsReadOnly="True" Foreground="Red"></TextBox>
     </Grid>
 </UserControl>

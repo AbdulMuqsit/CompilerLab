@@ -109,6 +109,15 @@ namespace CompilerLab.PFN
                 {
                     input = input.Insert(input.IndexOf("(-") + 1, "0");
                 }
+                for (int i = 0; i < 10; i++)
+                {
+                    while (input.IndexOf($"{i}(") > 0)
+                    {
+                        input = input.Insert(input.IndexOf($"{i}(") + 1, "*");
+                    }
+
+                }
+
                 return input;
             });
         }

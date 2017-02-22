@@ -50,11 +50,12 @@ namespace CompilerLab.PFN
                          }
                          else
                          {
-                             if (currentCharacter != '(' && currentCharacter != ')')
+                             while (operandStack.Count != 0 && currentCharacter != '(' && currentCharacter != ')' && precedence[operandStack.Peek()][1] >= precedence[currentCharacter][0])
                              {
                                  pfnStringBuilder.Append(operandStack.Pop());
-                             }
 
+                             }
+                             operandStack.Push(currentCharacter);
                          }
                      }
                  }
@@ -76,23 +77,38 @@ namespace CompilerLab.PFN
         {
             return await Task.Run(() =>
             {
-                while (true)
-                {
-
-                }
+                Stack<int> EvaluationStack = new Stack<int>();
+                int firsOperand, seconOperand;
                 if (PFNString.Count() == 1)
                 {
                     return Int32.Parse(PFNString);
                 }
+
+
                 var PFNArray = PFNString.ToCharArray();
-                for (int i = 0; i < PFNString.Count() - 2; i++)
+                for (int i = 0; i < PFNArray.Count(); i++)
                 {
-                    if (OperatorProperties.OperatorsList.Contains(PFNArray[i + 2]))
+                    if (OperatorProperties.OperatorsList.Contains(PFNArray[i]))
                     {
-                        EvaluateExpression(PFNArray[i], PFNArray[i + 1], PFNArray[i + 2]);
+                        seconOperand = EvaluationStack.Pop();
+                        firsOperand = EvaluationStack.Pop();
+                        if (i < PFNArray.Count() - 1 && PFNArray[i] == '-' && PFNArray[i + 1] == '-')
+                        {
+                            EvaluationStack.Push(EvaluateExpression(-firsOperand, seconOperand, PFNArray[i]));
+
+                        }
+                        else
+                        {
+                            EvaluationStack.Push(EvaluateExpression(firsOperand, seconOperand, PFNArray[i]));
+
+                        }
+                    }
+                    else
+                    {
+                        EvaluationStack.Push((int)Char.GetNumericValue(PFNArray[i]));
                     }
                 }
-                return 0;
+                return EvaluationStack.Pop();
             });
 
         }
@@ -109,6 +125,11 @@ namespace CompilerLab.PFN
                 {
                     input = input.Insert(input.IndexOf("(-") + 1, "0");
                 }
+
+                while (input.IndexOf("((") > 0)
+                {
+                    input = input.Insert(input.IndexOf("((") + 1, "*");
+                }
                 for (int i = 0; i < 10; i++)
                 {
                     while (input.IndexOf($"{i}(") > 0)
@@ -122,7 +143,7 @@ namespace CompilerLab.PFN
             });
         }
 
-        private int EvaluateExpression(char firstOperand, char secondOperand, char @operator)
+        private int EvaluateExpression(int firstOperand, int secondOperand, char @operator)
         {
             var x = Convert.ToInt32(firstOperand);
             var y = Convert.ToInt32(secondOperand);
@@ -140,7 +161,11 @@ namespace CompilerLab.PFN
             }
             else if (@operator == '-')
             {
-                return x - y;
+                return x - Math.Abs(y);
+            }
+            else if (@operator == '^')
+            {
+                return (int)Math.Pow(x, y);
             }
             else
             {

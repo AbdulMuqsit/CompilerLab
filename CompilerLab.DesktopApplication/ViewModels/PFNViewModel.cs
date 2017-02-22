@@ -64,6 +64,7 @@ namespace CompilerLab.DesktopApplication.ViewModels
         }
 
         private string _normalizedInput;
+        private string _evaluatedOuptup;
 
         public string NormalizedInput
         {
@@ -72,6 +73,22 @@ namespace CompilerLab.DesktopApplication.ViewModels
             {
                 if (_normalizedInput == value) return;
                 _normalizedInput = value;
+                OnPropertyChanged();
+            }
+        }
+        public string EvaluatedOutput
+        {
+            get
+            {
+                return _evaluatedOuptup;
+            }
+            set
+            {
+                if (_evaluatedOuptup == value)
+                {
+                    return;
+                }
+                _evaluatedOuptup = value;
                 OnPropertyChanged();
             }
         }
@@ -90,6 +107,7 @@ namespace CompilerLab.DesktopApplication.ViewModels
             {
                 NormalizedInput = await PFNEngine.Normalize(inputString);
                 IntermediatePFNString = await PFNEngine.ConvertToPFNString(NormalizedInput, OperatorProperties.Precedence);
+                EvaluatedOutput = (await PFNEngine.EvaluatePFNString(intermediatePFNString)).ToString();
 
             }
             catch (System.Exception ex)

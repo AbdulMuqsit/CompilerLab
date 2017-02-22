@@ -11,6 +11,7 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
 
             <RowDefinition Height="*"></RowDefinition>
 
@@ -28,7 +29,12 @@
 
             <TextBlock Name="TxtBlkOutput" Text="{Binding IntermediatePFNString}" Foreground="Blue"></TextBlock>
         </StackPanel>
+        <StackPanel  Orientation="Horizontal"  Grid.Row="4" >
+            <TextBlock FontWeight="Bold"  Text="Evaluated Expression: " ></TextBlock>
 
-        <TextBox Name="TxtBlkError"  Grid.Row="4" VerticalScrollBarVisibility="Auto"  Text="{Binding ErrorString}" AcceptsReturn="True" TextWrapping="Wrap"  IsReadOnly="True" Foreground="Red"></TextBox>
+            <TextBlock FontWeight="Bold" Text="{Binding EvaluatedOutput}" Foreground="Blue"></TextBlock>
+        </StackPanel>
+
+        <TextBox Name="TxtBlkError"  Grid.Row="5" VerticalScrollBarVisibility="Auto"  Text="{Binding ErrorString}" AcceptsReturn="True" TextWrapping="Wrap"  IsReadOnly="True" Foreground="Red"></TextBox>
     </Grid>
 </UserControl>

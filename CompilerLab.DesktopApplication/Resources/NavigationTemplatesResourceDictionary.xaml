@@ -9,4 +9,7 @@
     <DataTemplate  DataType="{x:Type vm:PFNViewModel}">
         <view:PFNView></view:PFNView>
     </DataTemplate>
+    <DataTemplate  DataType="{x:Type vm:RegexExamplesViewModel}">
+        <view:RegexExamplesView></view:RegexExamplesView>
+    </DataTemplate>
 </ResourceDictionary>

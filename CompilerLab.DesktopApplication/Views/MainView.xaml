@@ -13,7 +13,8 @@
 
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Button Command="{Binding NavigateToPFNViewCommand}">Lab1 PFN</Button>
+            <Button Command="{Binding NavigateToPFNViewCommand}">Lab 1,2 PFN</Button>
+            <Button Command="{Binding NavigateToRegexExamplesViewCommand}">Lab 3 Regex</Button>
 
         </StackPanel>
         <ContentControl Grid.Column="1"  Content="{Binding ChildViewModel}" />

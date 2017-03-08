@@ -17,9 +17,10 @@ namespace CompilerLab.DesktopApplication.Infrastructure
             var container = ((App)App.Current).container;
             PFNViewModel = container.Get<PFNViewModel>();
             MainViewModel = container.Get<MainViewModel>();
+            RegexExamplesViewModel = container.Get<RegexExamplesViewModel>();
         }
         public MainViewModel MainViewModel { get; }
         public PFNViewModel PFNViewModel { get; }
-
+        public RegexExamplesViewModel RegexExamplesViewModel { get; }
     }
 }

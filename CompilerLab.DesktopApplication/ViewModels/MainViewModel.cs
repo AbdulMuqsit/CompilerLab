@@ -17,9 +17,9 @@ namespace CompilerLab.DesktopApplication.ViewModels
         private void InitializeCommands()
         {
             NavigateToPFNViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.PFNViewModel, (obj) => ChildViewModel != ViewModelLocator?.PFNViewModel);
-
+            NavigateToRegexExamplesViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.RegexExamplesViewModel, (obj) => ChildViewModel != ViewModelLocator?.RegexExamplesViewModel);
         }
-
+        public RelayCommand NavigateToRegexExamplesViewCommand { get; set; }
         private ViewModelBase _childViewModel;
 
         public ViewModelBase ChildViewModel

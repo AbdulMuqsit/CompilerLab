@@ -119,42 +119,20 @@ namespace CompilerLab.DesktopApplication.ViewModels
 
         private bool ValidateInput(object obj)
         {
-            //ErrorString = String.Empty;
+            ErrorString = String.Empty;
+            if (String.IsNullOrWhiteSpace(inputString))
+            {
+                return false;
+            }
 
-            //if (String.IsNullOrWhiteSpace(inputString))
-            //{
-            //    ErrorString = String.Empty;
-            //    return false;
-            //}
-            //if (Regex.IsMatch(inputString, @"^\s*\d+\s*([+|-|\/|\^|*]\s*\d\s*)*$"))
-            //{
-            //    ErrorString = String.Empty;
-            //    State = State.Normal;
-            //    return true;
-            //}
-            //else
-            //{
-            //    State = State.Error;
-
-            //    if (Regex.IsMatch(inputString, @"^.*\d\d.*$"))
-            //    {
-            //        ErrorString += "Only single digit integers are allowed for now!\n";
-            //    }
-            //    if (Regex.IsMatch(inputString, @"^.*[a-z|A-Z].*$"))
-            //    {
-            //        ErrorString += "Alphabets are not allowed!\n";
-            //    }
-            //    if (Regex.IsMatch(inputString, @"^.*[+|-|/|\^|*][+|-|\/|\^|*].*$"))
-            //    {
-            //        ErrorString += "Consecutive operators are not allowed!\n";
-            //    }
-            //    if (Regex.IsMatch(inputString, @"[^\/\*\^a-zA-Z0-9-+\s]"))
-            //    {
-            //        ErrorString += "Special characters are not allowed\n";
-            //    }
-            //}
-            //return false;
-            return true;
+            if (Regex.IsMatch(inputString, @"^\s*\d+\s*([+-\/\^\*]\s*\d\s*)*$"))
+            {
+                ErrorString = String.Empty;
+                State = State.Normal;
+                return true;
+            }
+            ErrorString = "Invalid Input";
+            return false;
         }
 
     }

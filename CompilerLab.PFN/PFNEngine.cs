@@ -121,18 +121,18 @@ namespace CompilerLab.PFN
                 {
                     input = "0" + input;
                 }
-                while (input.IndexOf("(-") > 0)
+                while (input.IndexOf("(-") >= 0)
                 {
                     input = input.Insert(input.IndexOf("(-") + 1, "0");
                 }
 
-                while (input.IndexOf("((") > 0)
+                while (input.IndexOf("((") >= 0)
                 {
                     input = input.Insert(input.IndexOf("((") + 1, "*");
                 }
                 for (int i = 0; i < 10; i++)
                 {
-                    while (input.IndexOf($"{i}(") > 0)
+                    while (input.IndexOf($"{i}(") >= 0)
                     {
                         input = input.Insert(input.IndexOf($"{i}(") + 1, "*");
                     }

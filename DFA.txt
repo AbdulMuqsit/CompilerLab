@@ -1,0 +1,6 @@
+ { "q0", new Dictionary<string, string>{ { "x", "q1" }, { "y", "q5" }, { "z", "q5" } } },
+ { "q1", new Dictionary<string, string>{ { "y", "q2" }, { "z", "q5" }, { "x", "q5" } } },
+ { "q2", new Dictionary<string, string>{ { "z", "q3" }, { "x", "q5" }, { "y", "q5" } } },
+ { "q3", new Dictionary<string, string>{ { "z", "q4" }, { "x", "q5" }, { "y", "q5" } } },
+ { "q4", new Dictionary<string, string>{ { "x", "q5" }, { "y", "q5" }, { "z", "q5" } } },
+ { "q5", new Dictionary<string, string>{ { "x", "q5" }, { "y", "q5" }, { "z", "q5" } } },

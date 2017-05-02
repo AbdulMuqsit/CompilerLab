@@ -18,9 +18,14 @@ namespace CompilerLab.DesktopApplication.Infrastructure
             PFNViewModel = container.Get<PFNViewModel>();
             MainViewModel = container.Get<MainViewModel>();
             RegexExamplesViewModel = container.Get<RegexExamplesViewModel>();
+            JavaRegexViewModel = container.Get<JavaRegexViewModel>();
+            DFAViewModel = container.Get<DFAViewModel>();
+            
         }
         public MainViewModel MainViewModel { get; }
         public PFNViewModel PFNViewModel { get; }
         public RegexExamplesViewModel RegexExamplesViewModel { get; }
+        public JavaRegexViewModel JavaRegexViewModel { get; set; }
+        public DFAViewModel DFAViewModel { get; internal set; }
     }
 }

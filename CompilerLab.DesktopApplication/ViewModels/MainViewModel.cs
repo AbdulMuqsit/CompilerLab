@@ -16,10 +16,13 @@ namespace CompilerLab.DesktopApplication.ViewModels
 
         private void InitializeCommands()
         {
-            NavigateToPFNViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.PFNViewModel, (obj) => ChildViewModel != ViewModelLocator?.PFNViewModel);
-            NavigateToRegexExamplesViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.RegexExamplesViewModel, (obj) => ChildViewModel != ViewModelLocator?.RegexExamplesViewModel);
+            NavigateToPFNViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.PFNViewModel, (obj) => !(ChildViewModel is PFNViewModel));
+            NavigateToRegexExamplesViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.RegexExamplesViewModel, (obj) => !(ChildViewModel is RegexExamplesViewModel));
+            NavigateToRegexExamplesViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.JavaRegexViewModel, (obj) => !(ChildViewModel is JavaRegexViewModel));
+            NavigateToDFAViewCommand = new RelayCommand(obj => ChildViewModel = ViewModelLocator?.DFAViewModel, (obj) => !(ChildViewModel is DFAViewModel));
         }
-        public RelayCommand NavigateToRegexExamplesViewCommand { get; set; }
+
+
         private ViewModelBase _childViewModel;
 
         public ViewModelBase ChildViewModel
@@ -39,6 +42,9 @@ namespace CompilerLab.DesktopApplication.ViewModels
 
         #region commands
         public RelayCommand NavigateToPFNViewCommand { get; set; }
+        public RelayCommand NavigateToRegexExamplesViewCommand { get; set; }
+        public RelayCommand NavigateToJavaRegexViewCommand { get; set; }
+        public RelayCommand NavigateToDFAViewCommand { get; set; }
         #endregion
     }
 }

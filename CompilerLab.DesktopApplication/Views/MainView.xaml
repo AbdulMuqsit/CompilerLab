@@ -12,11 +12,13 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Margin="5">
             <Button Command="{Binding NavigateToPFNViewCommand}">Lab 1,2 PFN</Button>
             <Button Command="{Binding NavigateToRegexExamplesViewCommand}">Lab 3 Regex</Button>
+            <Button Command="{Binding NavigateToRegexExamplesViewCommand}" Content="Lab 4,5 Java Regex"/>
+            <Button Command="{Binding NavigateToDFAViewCommand}" Content="DFA"/>
 
         </StackPanel>
-        <ContentControl Grid.Column="1"  Content="{Binding ChildViewModel}" />
+        <ContentControl Grid.Column="1"  Content="{Binding ChildViewModel}" Margin="5"/>
     </Grid>
 </UserControl>
